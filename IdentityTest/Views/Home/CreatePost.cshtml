@@ -1,0 +1,38 @@
+﻿@model IdenTestUser
+
+@{
+	ViewData["Title"] = "Create Post";
+}
+
+<style>
+	.Frame{
+		width: 200px;
+		height: auto;
+		display: none;
+	}
+</style>
+
+@if (User?.Identity?.IsAuthenticated ?? false)
+{
+	<form method="post" enctype="multipart/form-data">
+		<textarea name="Content"></textarea>
+		<input type="file" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*" name="media" onchange="ShowPreview(this)" />
+		<img id="PreviewFrame" />
+
+		<input type="submit" value="Submit"/>
+	</form>
+}
+
+
+
+<script>
+	function ShowPreview(input){
+		const [file] = input.files;
+
+		if (file) {
+			const frame = document.getElementById("PreviewFrame");
+			frame.src = URL.createObjectURL(file);
+			frame.style.display = "block";
+		}
+	}
+</script>

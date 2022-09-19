@@ -1,13 +1,33 @@
-﻿@model string
+﻿@model IdenTestUser
 
 @{
-    ViewData["Title"] = "Authentication";
+	ViewData["Title"] = "Authentication";
 }
 
 <h1 class="bg-info text-white">Index</h1>
-@Model
 
 @if (User?.Identity?.IsAuthenticated ?? false)
 {
-    <a asp-controller="Account" asp-action="Logout" class="btn btn-danger">Logout</a>
+	<a asp-controller="Account" asp-action="Logout" class="btn btn-danger">Logout</a>
+
+	<a asp-action="CreatePost" class="NButton">CreatePost</a>
+
+	<a asp-action="Update" class="NButton">Update</a>
+
+	@if (Model.Posts.Any())
+	{
+		@foreach (var post in Model.Posts.Reverse())
+		{
+			<div class="post-container">
+				<div class="post-content">@post.PostContent</div>
+
+				@if (post.Media != null)
+				{
+					<div class="post-media">
+						<img src="data:image/png;base64,@post.Media" />
+					</div>
+				}
+			</div>
+		}
+	}
 }

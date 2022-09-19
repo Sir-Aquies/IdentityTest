@@ -55,5 +55,40 @@ namespace IdentityTest.Controllers
             await signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
+
+        [AllowAnonymous]
+        public ViewResult Create() => View();
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(UserModel user)
+        {
+            if (ModelState.IsValid)
+            {
+                IdenTestUser itUser = new IdenTestUser
+                {
+                    UserName = user.Name,
+                    Email = user.Email,
+
+                };
+
+                IdentityResult result = await userManager.CreateAsync(itUser, user.Password);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+                }
+            }
+
+            return View(user);
+        }
     }
 }
