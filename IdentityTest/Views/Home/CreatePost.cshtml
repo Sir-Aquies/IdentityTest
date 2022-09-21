@@ -5,34 +5,37 @@
 }
 
 <style>
-	.Frame{
-		width: 200px;
+	.frame{
+		max-width: 100%;
 		height: auto;
 		display: none;
+		border: 1px double black;
+		margin: 0.5rem;
 	}
 </style>
 
+<h1 style="width:100%; text-align: center;">Create new post</h1>
+
 @if (User?.Identity?.IsAuthenticated ?? false)
 {
-	<form method="post" enctype="multipart/form-data">
-		<textarea name="Content"></textarea>
-		<input type="file" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*" name="media" onchange="ShowPreview(this)" />
-		<img id="PreviewFrame" />
+	<form method="post" enctype="multipart/form-data" class="form-container">
 
-		<input type="submit" value="Submit"/>
+		<div class="form-fields">
+			<label>Post Content</label>
+			<textarea name="Content"></textarea>
+
+			<label onclick="document.getElementById('FileFrame').click();" class="form-button">Add image</label>
+			<input value="Delete image" id="deleteBtn" type="button" class="form-button" onclick="DeletePreview()" style="display: none"/>
+			<input type="file" id="FileFrame" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*" name="media" onchange="ShowPreview(this)" style="display: none;" />
+			<img id="PreviewFrame" class="frame"/>
+		</div>
+
+		<input type="submit" value="Submit" class="form-button" />
 	</form>
 }
 
 
 
 <script>
-	function ShowPreview(input){
-		const [file] = input.files;
-
-		if (file) {
-			const frame = document.getElementById("PreviewFrame");
-			frame.src = URL.createObjectURL(file);
-			frame.style.display = "block";
-		}
-	}
+	
 </script>

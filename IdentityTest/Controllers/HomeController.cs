@@ -82,9 +82,9 @@ namespace IdentityTest.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Update(string email, string password)
 		{
-            IdenTestUser user = await userManager.GetUserAsync(HttpContext.User);
+			IdenTestUser user = await userManager.GetUserAsync(HttpContext.User);
 
-            if (user != null)
+			if (user != null)
 			{
 				if (!string.IsNullOrEmpty(email))
 				{
@@ -113,6 +113,21 @@ namespace IdentityTest.Controllers
 				ModelState.AddModelError("", "User Not Found");
 			return View(user);
 
+		}
+
+		public async Task<IActionResult> AllUsers()
+		{
+			IdenTestUser user = await userManager.GetUserAsync(HttpContext.User);
+			
+			return View(user);
+		}
+
+		public async Task<IActionResult> GetAllUsers()
+		{
+			IdenTestUser user =  await userManager.GetUserAsync(HttpContext.User);
+			IQueryable<IdenTestUser> userList = userManager.Users;
+
+            return PartialView("UsersTable", userList);
 		}
 
 		private void Errors(IdentityResult result)

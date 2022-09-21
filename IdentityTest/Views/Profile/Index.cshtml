@@ -1,0 +1,28 @@
+﻿@model UserView
+
+@{
+	ViewData["Title"] = Model.PageUser.UserName;
+}
+
+<h1 style="text-align:center;">@Model.PageUser.UserName</h1>
+
+@if (User?.Identity?.IsAuthenticated ?? false)
+{
+	@if (Model.PageUser.Posts.Any())
+	{
+		@foreach (var post in Model.PageUser.Posts.Reverse())
+		{
+			<div class="post-container">
+				<div class="post-content">@post.PostContent</div>
+
+				@if (post.Media != null)
+				{
+					<div class="post-media">
+						<img src="data:image/png;base64,@post.Media" />
+					</div>
+				}
+			</div>
+		}
+	}
+	
+}

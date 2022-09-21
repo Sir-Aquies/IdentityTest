@@ -1,0 +1,27 @@
+﻿@model IdenTestUser
+
+@{
+	ViewData["Title"] = "Users";
+}
+
+@if (User?.Identity?.IsAuthenticated ?? false) {
+	
+}
+<div id="allUserTable" class="avg-container">
+
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+<script>
+	$(document).ready(function () {
+		$.get("/Home/GetAllUsers", function (data, status) {
+			if (status === "success") {
+				$("#allUserTable").html(data)
+			}
+
+		});
+	});
+</script>
+
+

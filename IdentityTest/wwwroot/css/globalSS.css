@@ -14,15 +14,19 @@ div.post-container {
 
 div.post-content {
 	white-space: pre-wrap;
-	padding: 0.4rem; 
+	font-size: 20px;
+	width: 100%;
+	padding: 0.4rem;
+	border-bottom: 1px solid black;
 }
 
 div.post-media {
 	padding: 0.4rem;
+	width: 100%;
 }
 
 div.post-media img {
-	width: 10rem;
+	max-width: 100%;
 	height: auto;
 }
 
@@ -38,7 +42,7 @@ div.from-fields {
 	margin: 1rem 0;
 }
 
-div.from-fields input, label {
+div.from-fields input, label, textarea {
 	width: 100%;
 	margin: 0.25rem 0;
 	color: black;
@@ -49,6 +53,10 @@ div.from-fields input {
 	border: 1px solid gray;
 	border-radius: 5px;
 	padding: 0.3rem;
+}
+
+div.from-fields textarea {
+	height: 7rem;
 }
 
 div.form-button-container {
@@ -64,6 +72,13 @@ div.form-button-container {
 	color: white;
 	padding: 0.5rem;
 	background-color: dodgerblue;
-	border-radius: 10%;
+	border-radius: 10px;
 	border: 0;
+}
+
+div.avg-container {
+	width: 100%;
+	height: fit-content;
+	margin: 0.5rem;
+	border: 1px solid dodgerblue;
 }
