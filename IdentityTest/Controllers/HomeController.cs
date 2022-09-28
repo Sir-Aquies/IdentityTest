@@ -127,7 +127,7 @@ namespace IdentityTest.Controllers
 			IdenTestUser user =  await userManager.GetUserAsync(HttpContext.User);
 			IQueryable<IdenTestUser> userList = userManager.Users;
 
-            return PartialView("UsersTable", userList);
+			return PartialView("UsersTable", userList);
 		}
 
 		private void Errors(IdentityResult result)

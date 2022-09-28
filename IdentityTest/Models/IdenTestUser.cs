@@ -6,7 +6,6 @@ namespace IdentityTest.Models
 {
     public class IdenTestUser : IdentityUser
     {
-        [BindNever]
         public ICollection<Post> Posts { get; set; }
     }
 }
