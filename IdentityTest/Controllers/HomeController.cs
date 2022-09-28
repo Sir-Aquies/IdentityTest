@@ -125,7 +125,7 @@ namespace IdentityTest.Controllers
 		public async Task<IActionResult> GetAllUsers()
 		{
 			IdenTestUser user =  await userManager.GetUserAsync(HttpContext.User);
-			IQueryable<IdenTestUser> userList = userManager.Users;
+			IQueryable<IdenTestUser> userList = userManager.Users.Include(x => x.Posts);
 
 			return PartialView("UsersTable", userList);
 		}

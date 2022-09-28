@@ -1,14 +1,15 @@
-﻿.NButton {
+﻿.normal-Button {
 	width: fit-content;
 	padding: 0.5rem;
 	background-color: transparent;
-	border: 1px solid gray;
+	text-decoration: none;
+	font-size: 22px;
 }
 
 div.post-container {
 	margin: 0.25rem auto;
-	width: 50%;
-	padding: 0.5rem;
+	width: 100%;
+	max-width: 40rem;
 	border: 1px solid black;
 }
 
@@ -16,23 +17,25 @@ div.post-content {
 	white-space: pre-wrap;
 	font-size: 20px;
 	width: 100%;
-	padding: 0.4rem;
+	padding: 0.5rem;
 	border-bottom: 1px solid black;
 }
 
 div.post-media {
-	padding: 0.4rem;
 	width: 100%;
+	padding: 0.5rem;
 }
 
 div.post-media img {
 	max-width: 100%;
+	display: block;
 	height: auto;
+	margin: 0.5rem auto;
 }
 
 form.form-container {
 	margin: 0.5rem auto;
-	width: 40%;
+	width: 100%;
 	max-width: 35rem;
 	padding: 0.5rem;
 }
@@ -56,7 +59,7 @@ div.from-fields input {
 }
 
 div.from-fields textarea {
-	height: 7rem;
+	height: 10rem;
 }
 
 div.form-button-container {
@@ -76,9 +79,21 @@ div.form-button-container {
 	border: 0;
 }
 
-div.avg-container {
+.avg-container {
 	width: 100%;
+	max-width: 45rem;
 	height: fit-content;
-	margin: 0.5rem;
-	border: 1px solid dodgerblue;
+	margin: 0.5rem auto;
+}
+
+.content-bar {
+	display: flex;
+	justify-content: space-around;
+	position: relative;
+	width: 100%;
+	max-width: 40rem;
+	margin: 2rem auto;
+	padding: 0.5rem;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
 }

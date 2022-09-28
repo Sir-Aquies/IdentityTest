@@ -4,16 +4,35 @@
 	a {
 		text-decoration: none;
 		color: black;
+		cursor: pointer;
+		font-size: 18px;
+	}
+
+	td {
+		font-size: 18px;
 	}
 </style>
 
 <table class="table table-sm table-bordered">
 	@if (Model.Any()) {
+		<tr>
+			<th>Username</th>
+			<th>Email</th>
+			<th>Amount of post</th>
+		</tr>
 		@foreach (IdenTestUser user in Model)
 		{
 			<tr>
 				<td><a asp-action="Index" asp-controller="Profile" asp-route-Username="@user.UserName">@user.UserName</a></td>
 				<td>@user.Email</td>
+				@if (user.Posts.Count != 0)
+				{
+					<td>@user.Posts.Count()</td>
+				}
+				else 
+				{
+					<td>0</td>
+				}
 			</tr>
 		}
 	}

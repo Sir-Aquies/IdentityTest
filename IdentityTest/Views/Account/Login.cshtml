@@ -3,28 +3,34 @@
 	ViewData["Title"] = "Login";
 }
 
-<h1 style="width:100%; text-align: center;" >Login</h1>
+<h1 style="text-align: center;" >Login</h1>
 
 <div class="text-danger" asp-validation-summary="All"></div>
   
 <form asp-action="Login" method="post" class="form-container">
-	<input type="hidden" asp-for="ReturnUrl" />
+	<input type="hidden" asp-for="ReturnUrl"/>
 	<div class="from-fields">
 		<label asp-for="Email"></label>
-		<input asp-for="Email" value="tom02@gmail.com"/>
+		<input asp-for="Email" value=""/>
 
 		<label asp-for="Password"></label>
-		<input asp-for="Password" value="tom--Password09"/>
+		<input asp-for="Password" value=""/>
 	</div>
 
 	<div class="form-button-container">
-		<a class="form-button" asp-action="Create" asp-controller="Account">Create</a>
+		<a class="form-button" asp-action="Create">Create</a>
 
 		<button class="form-button" type="submit">Log In</button>
 	</div>
 </form>
 
 <pre>
-	Email: Eliot09@gmail.com 
-	Password: eliot09--Password
+	Eliot09@gmail.com 
+	eliot09--Password
+
+	tom02@gmail.com
+	tom--Password09
+
+	Han27@hotmail.com
+	han--Password27
 </pre>

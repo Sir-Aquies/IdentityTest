@@ -41,7 +41,7 @@ namespace IdentityTest.Controllers
 
                     if (result.Succeeded)
                     {
-                        return RedirectToAction("Index", "Home");
+                        return Redirect(login.ReturnUrl ?? "/");
                     }
                 }
                 ModelState.AddModelError(nameof(login.Email), "Login Failed: Invalid Email or password");

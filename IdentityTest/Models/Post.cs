@@ -14,5 +14,6 @@ namespace IdentityTest.Models
 		public string Media { get; set; }
 
 		public IdenTestUser User { get; set; }
-	}
+        public ICollection<Comments> Comments { get; set; }
+    }
 }

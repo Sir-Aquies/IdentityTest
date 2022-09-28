@@ -10,7 +10,7 @@
 		height: auto;
 		display: none;
 		border: 1px double black;
-		margin: 0.5rem;
+		margin: 0.5rem auto;
 	}
 </style>
 
@@ -23,19 +23,14 @@
 		<div class="form-fields">
 			<label>Post Content</label>
 			<textarea name="Content"></textarea>
-
-			<label onclick="document.getElementById('FileFrame').click();" class="form-button">Add image</label>
-			<input value="Delete image" id="deleteBtn" type="button" class="form-button" onclick="DeletePreview()" style="display: none"/>
-			<input type="file" id="FileFrame" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*" name="media" onchange="ShowPreview(this)" style="display: none;" />
-			<img id="PreviewFrame" class="frame"/>
 		</div>
-
-		<input type="submit" value="Submit" class="form-button" />
+		<img id="PreviewFrame" class="frame"/>
+		<div class="form-button-container">
+			<input value="Delete image" id="deleteBtn" type="button" class="form-button" onclick="DeletePreview()" style="display: none"/>
+			<label onclick="document.getElementById('FileFrame').click();" class="form-button">Add image</label>
+			<input type="file" id="FileFrame" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*" name="media" onchange="ShowPreview(this)" style="display: none;" />
+			<input type="submit" value="Create post" class="form-button" />
+		</div>
+		
 	</form>
 }
-
-
-
-<script>
-	
-</script>

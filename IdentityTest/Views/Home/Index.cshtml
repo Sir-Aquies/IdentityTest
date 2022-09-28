@@ -4,15 +4,17 @@
 	ViewData["Title"] = "Home";
 }
 
-<h1 class="bg-info text-white">Index</h1>
-
 @if (User?.Identity?.IsAuthenticated ?? false)
 {
-	<a asp-controller="Account" asp-action="Logout" class="btn btn-danger">Logout</a>
+	<h1 style="text-align:center">@Model.UserName</h1>
 
-	<a asp-action="CreatePost" class="NButton">CreatePost</a>
+	<div class="content-bar">
+		<a asp-action="CreatePost" class="normal-Button">CreatePost</a>
 
-	<a asp-action="Update" class="NButton">Update</a>
+		<a asp-action="Update" class="normal-Button">Update</a>
+
+		<a asp-controller="Account" asp-action="Logout" class="normal-Button">Logout</a>
+	</div>
 
 	@if (Model.Posts.Any())
 	{
