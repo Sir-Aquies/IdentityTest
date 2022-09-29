@@ -22,6 +22,43 @@ namespace IdentityTest.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("IdentityTest.Models.Comments", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("CommentContent")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(MAX)")
+                        .HasColumnName("Content");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasColumnName("date")
+                        .HasDefaultValueSql("getdate()");
+
+                    b.Property<int>("PostId")
+                        .HasColumnType("int")
+                        .HasColumnName("post_id");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)")
+                        .HasColumnName("user_id");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PostId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Comments");
+                });
+
             modelBuilder.Entity("IdentityTest.Models.IdenTestUser", b =>
                 {
                     b.Property<string>("Id")
@@ -95,15 +132,23 @@ namespace IdentityTest.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<DateTime>("CreatedDate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("getdate()");
+
                     b.Property<string>("Media")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(MAX)")
+                        .HasColumnName("MediaBytes");
 
                     b.Property<string>("PostContent")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(MAX)")
+                        .HasColumnName("Content");
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(450)")
+                        .HasColumnName("user_id");
 
                     b.HasKey("Id");
 
@@ -245,6 +290,25 @@ namespace IdentityTest.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("IdentityTest.Models.Comments", b =>
+                {
+                    b.HasOne("IdentityTest.Models.Post", "Post")
+                        .WithMany("Comments")
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("IdentityTest.Models.IdenTestUser", "User")
+                        .WithMany("Comments")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Post");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("IdentityTest.Models.Post", b =>
                 {
                     b.HasOne("IdentityTest.Models.IdenTestUser", "User")
@@ -309,7 +373,14 @@ namespace IdentityTest.Migrations
 
             modelBuilder.Entity("IdentityTest.Models.IdenTestUser", b =>
                 {
+                    b.Navigation("Comments");
+
                     b.Navigation("Posts");
+                });
+
+            modelBuilder.Entity("IdentityTest.Models.Post", b =>
+                {
+                    b.Navigation("Comments");
                 });
 #pragma warning restore 612, 618
         }

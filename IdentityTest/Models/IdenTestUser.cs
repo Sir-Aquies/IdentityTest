@@ -7,5 +7,7 @@ namespace IdentityTest.Models
     public class IdenTestUser : IdentityUser
     {
         public ICollection<Post> Posts { get; set; }
+
+        public ICollection<Comments> Comments { get; set; }
     }
 }

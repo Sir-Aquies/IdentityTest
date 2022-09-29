@@ -11,6 +11,7 @@ namespace IdentityTest.Models
         public int PostId { get; set; }
         [Required]
         public string CommentContent { get; set; }
+        public DateTime CreatedDate { get; set; }
 
         public IdenTestUser User { get; set; }
         public Post Post { get; set; }

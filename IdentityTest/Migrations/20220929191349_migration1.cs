@@ -160,17 +160,46 @@ namespace IdentityTest.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    PostContent = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Media = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    user_id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Content = table.Column<string>(type: "nvarchar(MAX)", nullable: true),
+                    MediaBytes = table.Column<string>(type: "nvarchar(MAX)", nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "getdate()")
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Posts", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Posts_AspNetUsers_UserId",
-                        column: x => x.UserId,
+                        name: "FK_Posts_AspNetUsers_user_id",
+                        column: x => x.user_id,
                         principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Comments",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    user_id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    post_id = table.Column<int>(type: "int", nullable: false),
+                    Content = table.Column<string>(type: "nvarchar(MAX)", nullable: false),
+                    date = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "getdate()")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Comments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Comments_AspNetUsers_user_id",
+                        column: x => x.user_id,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Comments_Posts_post_id",
+                        column: x => x.post_id,
+                        principalTable: "Posts",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -215,9 +244,19 @@ namespace IdentityTest.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Posts_UserId",
+                name: "IX_Comments_post_id",
+                table: "Comments",
+                column: "post_id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comments_user_id",
+                table: "Comments",
+                column: "user_id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Posts_user_id",
                 table: "Posts",
-                column: "UserId");
+                column: "user_id");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -238,10 +277,13 @@ namespace IdentityTest.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Posts");
+                name: "Comments");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Posts");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
