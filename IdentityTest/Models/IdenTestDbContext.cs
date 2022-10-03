@@ -10,6 +10,7 @@ namespace IdentityTest.Models
 		public IdenTestDbContext(DbContextOptions<IdenTestDbContext> options): base(options) { }
 
 		public DbSet<Post> Posts { get; set; }
+		public DbSet<Comments> Comments { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder builder)
 		{

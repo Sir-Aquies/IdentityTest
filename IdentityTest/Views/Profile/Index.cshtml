@@ -21,6 +21,41 @@
 						<img src="data:image/png;base64,@post.Media" />
 					</div>
 				}
+
+				@if (post.Comments.Any()) 
+				{
+					@foreach (Comments comment in post.Comments) 
+					{
+						<hr />
+						<div class="comment-container">
+							<div class="comment-info">
+								<a asp-action="Index" asp-route-Username="@comment.User.UserName">@comment.User</a>
+								@if (comment.CreatedDate.ToString("MM,dd,yyyy") == DateTime.Today.ToString("MM,dd,yyyy"))
+								{
+									<span>@comment.CreatedDate.ToString("hh:mm tt")</span>
+								}
+								else {
+									<span>@comment.CreatedDate.ToString("MM,dd,yyyy")</span>
+								}
+								
+							</div>
+
+							<div class="comment-content">@comment.CommentContent</div>
+						</div>
+					}
+				}
+
+				<hr />
+				<div class="form-comment-container">
+					<form method="post" asp-action="CreateComment">
+						<input type="hidden" value="@post.Id" name="PostId" />
+						<input type="hidden" value="@Model.PageUser.UserName" name="puName" />
+						<input type="text" name="CommentContent" class="comment-input" placeholder="Add a comment..." />
+
+						<input type="submit" value="Comment" class="form-button" style="margin-left: auto; display: block;" />
+					</form>
+				</div>
+				
 			</div>
 		}
 	}

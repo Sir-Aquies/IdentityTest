@@ -17,7 +17,7 @@ div.post-content {
 	white-space: pre-wrap;
 	font-size: 20px;
 	width: 100%;
-	padding: 0.5rem;
+	padding: 0.3rem;
 	border-bottom: 1px solid black;
 }
 
@@ -30,7 +30,39 @@ div.post-media img {
 	max-width: 100%;
 	display: block;
 	height: auto;
-	margin: 0.5rem auto;
+	margin: 0 auto;
+}
+
+.comment-container {
+	width: 100%;
+	padding: 0 0.3rem;
+}
+
+.comment-info a {
+	text-decoration: none;
+	color: black;
+	cursor: pointer;
+	font-size: 20px;
+	margin-right: 0.5rem;
+}
+
+.comment-content {
+	white-space: pre-wrap;
+	font-size: 20px;
+	padding: 0.3rem;
+}
+
+.form-comment-container {
+	width: 100%;
+	padding: 0.5rem;
+	/*margin-top: 0.5rem;*/
+}
+
+.comment-input {
+	width: 100%;
+	border: 2px solid black;
+	font-size: 20px;
+	margin-bottom: 0.5rem;
 }
 
 form.form-container {
