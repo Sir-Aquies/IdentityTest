@@ -21,9 +21,19 @@ namespace IdentityTest.Controllers
 
 		public async Task<IActionResult> Index(string Username)
 		{
+			if (string.IsNullOrEmpty(Username))
+			{
+                return NotFound();
+            }
+
 			UserView users = new UserView();
 			users.CurentUser = await userManager.GetUserAsync(HttpContext.User);
 			users.PageUser = await userManager.FindByNameAsync(Username);
+
+			if (users.PageUser == null)
+			{
+                return NotFound();
+            }
 
 			users.PageUser.Posts = await IdenTestDb.Posts.Where(p => p.UserId == users.PageUser.Id).Include(c => c.Comments).ThenInclude(c => c.User).ToListAsync();
 
